@@ -17,7 +17,7 @@ class OrdersFacade implements IOrdersFacade {
   @override
   Future<Either<ClassFailures, Unit>> createCustomer(
       c.Customer customer) async {
-    final response = await _grpcOrdersService.client.createCustomer(
+    final response = await _grpcOrdersService.client!.createCustomer(
       $pb.CreateCustomerReq(
         name: customer.name,
         lat: customer.location.lat,
@@ -34,17 +34,19 @@ class OrdersFacade implements IOrdersFacade {
 
   @override
   Future<Either<ClassFailures, Unit>> createOrder(OrderItem order) async {
-    final response = await _grpcOrdersService.client
-        .createOrder($pb.CreateOrderReq(order: $pb.Order(
+    final response =
+        await _grpcOrdersService.client!.createOrder($pb.CreateOrderReq(
+            order: $pb.Order(
       id: order.id,
       status: order.status,
-      items: order.products?.map((e) => $pb.Product(
-        sku: e.sku,
-        description: e.description,
-        name: e.name,
-        price: e.price
-      )).toList(),
-      deliveryDate: null,
+      items: order.products
+          ?.map((e) => $pb.Product(
+              sku: e.sku,
+              description: e.description,
+              name: e.name,
+              price: e.price))
+          .toList(),
+      deliveryDate: Int64(order.deliveryDate.toUtc().millisecondsSinceEpoch),
       orderNo: order.orderNo,
       customerId: order.customerId,
     )));
@@ -58,9 +60,9 @@ class OrdersFacade implements IOrdersFacade {
 
   @override
   Stream<Either<ClassFailures, OrderItem>> getAllOrders() async* {
-    final stream = _grpcOrdersService.client.getOrdersStream($pb.EmptyReq());
+    final stream = _grpcOrdersService.client!.getOrdersStream($pb.EmptyReq());
     yield* stream.asyncMap((event) async {
-      if(event.hasOrder()) {
+      if (event.hasOrder()) {
         return right(OrderItem.fromPb(event.order));
       } else {
         return left(const ClassFailures.unexpected());
@@ -68,14 +70,13 @@ class OrdersFacade implements IOrdersFacade {
     });
   }
 
-
-
   @override
   Future<Either<ClassFailures, Unit>> updateOrderStatus(
       String orderId, String status) async {
     try {
-      final results = await _grpcOrdersService.client.updateOrderStatus($pb.UpdateOrderStatusReq(status: status, id: orderId));
-      if(results.success) {
+      final results = await _grpcOrdersService.client!.updateOrderStatus(
+          $pb.UpdateOrderStatusReq(status: status, id: orderId));
+      if (results.success) {
         return right(unit);
       } else {
         return left(const ClassFailures.unexpected());
@@ -86,14 +87,19 @@ class OrdersFacade implements IOrdersFacade {
   }
 
   @override
-  Future<Either<ClassFailures, List<OrderItem>>> getOrders(String? customerId) async {
+  Future<Either<ClassFailures, List<OrderItem>>> getOrders(
+      String? customerId) async {
+    print("We got here");
     try {
-      return await _grpcOrdersService.client.getOrders($pb.GetOrdersReq(customerId: customerId))
-      .then((v) {
-          final results = v.orders.map((e) => OrderItem.fromPb(e)).toList();
-          return right(results);
+      return await _grpcOrdersService.client!
+          .getOrders($pb.GetOrdersReq(customerId: customerId))
+          .then((v) {
+        print("We got some data ${v.orders}");
+        final results = v.orders.map((e) => OrderItem.fromPb(e)).toList();
+        return right(results);
       });
-    } catch(e) {
+    } catch (e) {
+      print("e $e");
       return left(const ClassFailures.server("Could not fetch initial orders"));
     }
   }

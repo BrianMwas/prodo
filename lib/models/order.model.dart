@@ -11,7 +11,7 @@ class OrderItem with _$OrderItem {
   const factory OrderItem(
       {String? id,
       required String status,
-      required String customerId,
+      @Default("628de2a3cccfb786e449f198") String? customerId,
       @JsonKey(name: "items") List<Product>? products,
       required DateTime deliveryDate,
       required String orderNo,
@@ -25,19 +25,22 @@ class OrderItem with _$OrderItem {
         deliveryDate: DateTime.now(),
       );
 
-
   factory OrderItem.fromPb($pb.Order order) {
     return OrderItem(
         id: order.id,
         status: order.status,
         customerId: order.customerId,
-        products: order.items.map((e) => Product(
-            id: e.id,
-            name: e.name, price: e.price, sku: e.sku, description: e.description)).toList(),
+        products: order.items
+            .map((e) => Product(
+                id: e.id,
+                name: e.name,
+                price: e.price,
+                sku: e.sku,
+                description: e.description))
+            .toList(),
         deliveryDate: DateTime.fromMicrosecondsSinceEpoch(
             order.deliveryDate.toInt(),
             isUtc: true),
-
         orderNo: order.orderNo);
   }
 

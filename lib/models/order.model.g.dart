@@ -9,7 +9,7 @@ part of 'order.model.dart';
 _$_OrderItem _$$_OrderItemFromJson(Map<String, dynamic> json) => _$_OrderItem(
       id: json['id'] as String?,
       status: json['status'] as String,
-      customerId: json['customerId'] as String,
+      customerId: json['customerId'] as String? ?? "628de2a3cccfb786e449f198",
       products: (json['items'] as List<dynamic>?)
           ?.map((e) => Product.fromJson(e as Map<String, dynamic>))
           .toList(),

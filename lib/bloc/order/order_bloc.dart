@@ -16,16 +16,10 @@ part 'order_bloc.freezed.dart';
 class OrderBloc extends Bloc<OrderEvent, OrderState> {
   final IOrdersFacade _facade;
   OrderBloc(this._facade) : super(OrderState.initial()) {
-    on<CustomerSelected>((event, emit) {
-      emit(
-        state.copyWith(
-          order: state.order.copyWith(
-            customerId: event.customerId,
-          ),
-        ),
-      );
+    on<OrderNumberUpdated>((event, emit) {
+      emit(state.copyWith(
+          order: state.order.copyWith(orderNo: event.orderNumber)));
     });
-
     on<ProductUpdated>((event, emit) {
       final productExists =
           state.order.products?.any((p) => p.id == event.product.id);

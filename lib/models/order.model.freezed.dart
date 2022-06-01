@@ -22,7 +22,7 @@ OrderItem _$OrderItemFromJson(Map<String, dynamic> json) {
 mixin _$OrderItem {
   String? get id => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
-  String get customerId => throw _privateConstructorUsedError;
+  String? get customerId => throw _privateConstructorUsedError;
   @JsonKey(name: "items")
   List<Product>? get products => throw _privateConstructorUsedError;
   DateTime get deliveryDate => throw _privateConstructorUsedError;
@@ -42,7 +42,7 @@ abstract class $OrderItemCopyWith<$Res> {
   $Res call(
       {String? id,
       String status,
-      String customerId,
+      String? customerId,
       @JsonKey(name: "items") List<Product>? products,
       DateTime deliveryDate,
       String orderNo,
@@ -79,7 +79,7 @@ class _$OrderItemCopyWithImpl<$Res> implements $OrderItemCopyWith<$Res> {
       customerId: customerId == freezed
           ? _value.customerId
           : customerId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       products: products == freezed
           ? _value.products
           : products // ignore: cast_nullable_to_non_nullable
@@ -109,7 +109,7 @@ abstract class _$$_OrderItemCopyWith<$Res> implements $OrderItemCopyWith<$Res> {
   $Res call(
       {String? id,
       String status,
-      String customerId,
+      String? customerId,
       @JsonKey(name: "items") List<Product>? products,
       DateTime deliveryDate,
       String orderNo,
@@ -148,7 +148,7 @@ class __$$_OrderItemCopyWithImpl<$Res> extends _$OrderItemCopyWithImpl<$Res>
       customerId: customerId == freezed
           ? _value.customerId
           : customerId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       products: products == freezed
           ? _value._products
           : products // ignore: cast_nullable_to_non_nullable
@@ -175,7 +175,7 @@ class _$_OrderItem implements _OrderItem {
   const _$_OrderItem(
       {this.id,
       required this.status,
-      required this.customerId,
+      this.customerId = "628de2a3cccfb786e449f198",
       @JsonKey(name: "items") final List<Product>? products,
       required this.deliveryDate,
       required this.orderNo,
@@ -190,7 +190,8 @@ class _$_OrderItem implements _OrderItem {
   @override
   final String status;
   @override
-  final String customerId;
+  @JsonKey()
+  final String? customerId;
   final List<Product>? _products;
   @override
   @JsonKey(name: "items")
@@ -256,7 +257,7 @@ abstract class _OrderItem implements OrderItem {
   const factory _OrderItem(
       {final String? id,
       required final String status,
-      required final String customerId,
+      final String? customerId,
       @JsonKey(name: "items") final List<Product>? products,
       required final DateTime deliveryDate,
       required final String orderNo,
@@ -270,7 +271,7 @@ abstract class _OrderItem implements OrderItem {
   @override
   String get status => throw _privateConstructorUsedError;
   @override
-  String get customerId => throw _privateConstructorUsedError;
+  String? get customerId => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: "items")
   List<Product>? get products => throw _privateConstructorUsedError;

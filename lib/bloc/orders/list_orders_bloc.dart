@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dartz/dartz.dart';
@@ -29,12 +27,20 @@ class ListOrdersBloc extends Bloc<ListOrdersEvent, ListOrdersState> {
               failure:
                   const ClassFailures.server("Could not fetch latest item"));
         }
-        return state.copyWith(items: [...?state.items, update]);
+        if (state.items!.any((element) => element.id == update.id)) {
+          return state.copyWith(
+              items: state.items!.map((e) {
+            if (e.id == update.id) {
+              return e.copyWith(status: update.status);
+            }
+            return e;
+          }).toList());
+        } else {
+          return state.copyWith(items: [...?state.items, update]);
+        }
       }, onError: (error, stack) {
-        return state.copyWith(
-            isLoading: false,
-            showFailure: true,
-            failure: const ClassFailures.server("Unable to get latest data"));
+        print("Error from stream $error");
+        return state;
       });
     }, transformer: restartable());
 
@@ -51,6 +57,7 @@ class ListOrdersBloc extends Bloc<ListOrdersEvent, ListOrdersState> {
 
         emit(state.copyWith(
           showFailure: true,
+          isLoading: false,
           failure: failureOrSuccess.foldLeft(null, (previous, r) => previous),
           items: failureOrSuccess.foldRight(null, (r, previous) => r),
         ));

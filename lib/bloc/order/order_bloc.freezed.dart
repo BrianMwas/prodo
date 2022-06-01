@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$OrderEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String customerId) customerSelected,
+    required TResult Function(String orderNumber) orderNumberUpdated,
     required TResult Function(Product product) productUpdated,
     required TResult Function(DateTime date) deliveryDateChanged,
     required TResult Function() createOrderCalled,
@@ -26,7 +26,7 @@ mixin _$OrderEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String customerId)? customerSelected,
+    TResult Function(String orderNumber)? orderNumberUpdated,
     TResult Function(Product product)? productUpdated,
     TResult Function(DateTime date)? deliveryDateChanged,
     TResult Function()? createOrderCalled,
@@ -34,7 +34,7 @@ mixin _$OrderEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String customerId)? customerSelected,
+    TResult Function(String orderNumber)? orderNumberUpdated,
     TResult Function(Product product)? productUpdated,
     TResult Function(DateTime date)? deliveryDateChanged,
     TResult Function()? createOrderCalled,
@@ -43,7 +43,7 @@ mixin _$OrderEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(CustomerSelected value) customerSelected,
+    required TResult Function(OrderNumberUpdated value) orderNumberUpdated,
     required TResult Function(ProductUpdated value) productUpdated,
     required TResult Function(DeliveryDateChanged value) deliveryDateChanged,
     required TResult Function(CreateOrderCalled value) createOrderCalled,
@@ -51,7 +51,7 @@ mixin _$OrderEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(CustomerSelected value)? customerSelected,
+    TResult Function(OrderNumberUpdated value)? orderNumberUpdated,
     TResult Function(ProductUpdated value)? productUpdated,
     TResult Function(DeliveryDateChanged value)? deliveryDateChanged,
     TResult Function(CreateOrderCalled value)? createOrderCalled,
@@ -59,7 +59,7 @@ mixin _$OrderEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(CustomerSelected value)? customerSelected,
+    TResult Function(OrderNumberUpdated value)? orderNumberUpdated,
     TResult Function(ProductUpdated value)? productUpdated,
     TResult Function(DeliveryDateChanged value)? deliveryDateChanged,
     TResult Function(CreateOrderCalled value)? createOrderCalled,
@@ -85,32 +85,32 @@ class _$OrderEventCopyWithImpl<$Res> implements $OrderEventCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$$CustomerSelectedCopyWith<$Res> {
-  factory _$$CustomerSelectedCopyWith(
-          _$CustomerSelected value, $Res Function(_$CustomerSelected) then) =
-      __$$CustomerSelectedCopyWithImpl<$Res>;
-  $Res call({String customerId});
+abstract class _$$OrderNumberUpdatedCopyWith<$Res> {
+  factory _$$OrderNumberUpdatedCopyWith(_$OrderNumberUpdated value,
+          $Res Function(_$OrderNumberUpdated) then) =
+      __$$OrderNumberUpdatedCopyWithImpl<$Res>;
+  $Res call({String orderNumber});
 }
 
 /// @nodoc
-class __$$CustomerSelectedCopyWithImpl<$Res>
+class __$$OrderNumberUpdatedCopyWithImpl<$Res>
     extends _$OrderEventCopyWithImpl<$Res>
-    implements _$$CustomerSelectedCopyWith<$Res> {
-  __$$CustomerSelectedCopyWithImpl(
-      _$CustomerSelected _value, $Res Function(_$CustomerSelected) _then)
-      : super(_value, (v) => _then(v as _$CustomerSelected));
+    implements _$$OrderNumberUpdatedCopyWith<$Res> {
+  __$$OrderNumberUpdatedCopyWithImpl(
+      _$OrderNumberUpdated _value, $Res Function(_$OrderNumberUpdated) _then)
+      : super(_value, (v) => _then(v as _$OrderNumberUpdated));
 
   @override
-  _$CustomerSelected get _value => super._value as _$CustomerSelected;
+  _$OrderNumberUpdated get _value => super._value as _$OrderNumberUpdated;
 
   @override
   $Res call({
-    Object? customerId = freezed,
+    Object? orderNumber = freezed,
   }) {
-    return _then(_$CustomerSelected(
-      customerId == freezed
-          ? _value.customerId
-          : customerId // ignore: cast_nullable_to_non_nullable
+    return _then(_$OrderNumberUpdated(
+      orderNumber == freezed
+          ? _value.orderNumber
+          : orderNumber // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -118,68 +118,69 @@ class __$$CustomerSelectedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CustomerSelected implements CustomerSelected {
-  const _$CustomerSelected(this.customerId);
+class _$OrderNumberUpdated implements OrderNumberUpdated {
+  const _$OrderNumberUpdated(this.orderNumber);
 
   @override
-  final String customerId;
+  final String orderNumber;
 
   @override
   String toString() {
-    return 'OrderEvent.customerSelected(customerId: $customerId)';
+    return 'OrderEvent.orderNumberUpdated(orderNumber: $orderNumber)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CustomerSelected &&
+            other is _$OrderNumberUpdated &&
             const DeepCollectionEquality()
-                .equals(other.customerId, customerId));
+                .equals(other.orderNumber, orderNumber));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(customerId));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(orderNumber));
 
   @JsonKey(ignore: true)
   @override
-  _$$CustomerSelectedCopyWith<_$CustomerSelected> get copyWith =>
-      __$$CustomerSelectedCopyWithImpl<_$CustomerSelected>(this, _$identity);
+  _$$OrderNumberUpdatedCopyWith<_$OrderNumberUpdated> get copyWith =>
+      __$$OrderNumberUpdatedCopyWithImpl<_$OrderNumberUpdated>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String customerId) customerSelected,
+    required TResult Function(String orderNumber) orderNumberUpdated,
     required TResult Function(Product product) productUpdated,
     required TResult Function(DateTime date) deliveryDateChanged,
     required TResult Function() createOrderCalled,
   }) {
-    return customerSelected(customerId);
+    return orderNumberUpdated(orderNumber);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String customerId)? customerSelected,
+    TResult Function(String orderNumber)? orderNumberUpdated,
     TResult Function(Product product)? productUpdated,
     TResult Function(DateTime date)? deliveryDateChanged,
     TResult Function()? createOrderCalled,
   }) {
-    return customerSelected?.call(customerId);
+    return orderNumberUpdated?.call(orderNumber);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String customerId)? customerSelected,
+    TResult Function(String orderNumber)? orderNumberUpdated,
     TResult Function(Product product)? productUpdated,
     TResult Function(DateTime date)? deliveryDateChanged,
     TResult Function()? createOrderCalled,
     required TResult orElse(),
   }) {
-    if (customerSelected != null) {
-      return customerSelected(customerId);
+    if (orderNumberUpdated != null) {
+      return orderNumberUpdated(orderNumber);
     }
     return orElse();
   }
@@ -187,47 +188,48 @@ class _$CustomerSelected implements CustomerSelected {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(CustomerSelected value) customerSelected,
+    required TResult Function(OrderNumberUpdated value) orderNumberUpdated,
     required TResult Function(ProductUpdated value) productUpdated,
     required TResult Function(DeliveryDateChanged value) deliveryDateChanged,
     required TResult Function(CreateOrderCalled value) createOrderCalled,
   }) {
-    return customerSelected(this);
+    return orderNumberUpdated(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(CustomerSelected value)? customerSelected,
+    TResult Function(OrderNumberUpdated value)? orderNumberUpdated,
     TResult Function(ProductUpdated value)? productUpdated,
     TResult Function(DeliveryDateChanged value)? deliveryDateChanged,
     TResult Function(CreateOrderCalled value)? createOrderCalled,
   }) {
-    return customerSelected?.call(this);
+    return orderNumberUpdated?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(CustomerSelected value)? customerSelected,
+    TResult Function(OrderNumberUpdated value)? orderNumberUpdated,
     TResult Function(ProductUpdated value)? productUpdated,
     TResult Function(DeliveryDateChanged value)? deliveryDateChanged,
     TResult Function(CreateOrderCalled value)? createOrderCalled,
     required TResult orElse(),
   }) {
-    if (customerSelected != null) {
-      return customerSelected(this);
+    if (orderNumberUpdated != null) {
+      return orderNumberUpdated(this);
     }
     return orElse();
   }
 }
 
-abstract class CustomerSelected implements OrderEvent {
-  const factory CustomerSelected(final String customerId) = _$CustomerSelected;
+abstract class OrderNumberUpdated implements OrderEvent {
+  const factory OrderNumberUpdated(final String orderNumber) =
+      _$OrderNumberUpdated;
 
-  String get customerId => throw _privateConstructorUsedError;
+  String get orderNumber => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$$CustomerSelectedCopyWith<_$CustomerSelected> get copyWith =>
+  _$$OrderNumberUpdatedCopyWith<_$OrderNumberUpdated> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -305,7 +307,7 @@ class _$ProductUpdated implements ProductUpdated {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String customerId) customerSelected,
+    required TResult Function(String orderNumber) orderNumberUpdated,
     required TResult Function(Product product) productUpdated,
     required TResult Function(DateTime date) deliveryDateChanged,
     required TResult Function() createOrderCalled,
@@ -316,7 +318,7 @@ class _$ProductUpdated implements ProductUpdated {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String customerId)? customerSelected,
+    TResult Function(String orderNumber)? orderNumberUpdated,
     TResult Function(Product product)? productUpdated,
     TResult Function(DateTime date)? deliveryDateChanged,
     TResult Function()? createOrderCalled,
@@ -327,7 +329,7 @@ class _$ProductUpdated implements ProductUpdated {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String customerId)? customerSelected,
+    TResult Function(String orderNumber)? orderNumberUpdated,
     TResult Function(Product product)? productUpdated,
     TResult Function(DateTime date)? deliveryDateChanged,
     TResult Function()? createOrderCalled,
@@ -342,7 +344,7 @@ class _$ProductUpdated implements ProductUpdated {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(CustomerSelected value) customerSelected,
+    required TResult Function(OrderNumberUpdated value) orderNumberUpdated,
     required TResult Function(ProductUpdated value) productUpdated,
     required TResult Function(DeliveryDateChanged value) deliveryDateChanged,
     required TResult Function(CreateOrderCalled value) createOrderCalled,
@@ -353,7 +355,7 @@ class _$ProductUpdated implements ProductUpdated {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(CustomerSelected value)? customerSelected,
+    TResult Function(OrderNumberUpdated value)? orderNumberUpdated,
     TResult Function(ProductUpdated value)? productUpdated,
     TResult Function(DeliveryDateChanged value)? deliveryDateChanged,
     TResult Function(CreateOrderCalled value)? createOrderCalled,
@@ -364,7 +366,7 @@ class _$ProductUpdated implements ProductUpdated {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(CustomerSelected value)? customerSelected,
+    TResult Function(OrderNumberUpdated value)? orderNumberUpdated,
     TResult Function(ProductUpdated value)? productUpdated,
     TResult Function(DeliveryDateChanged value)? deliveryDateChanged,
     TResult Function(CreateOrderCalled value)? createOrderCalled,
@@ -452,7 +454,7 @@ class _$DeliveryDateChanged implements DeliveryDateChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String customerId) customerSelected,
+    required TResult Function(String orderNumber) orderNumberUpdated,
     required TResult Function(Product product) productUpdated,
     required TResult Function(DateTime date) deliveryDateChanged,
     required TResult Function() createOrderCalled,
@@ -463,7 +465,7 @@ class _$DeliveryDateChanged implements DeliveryDateChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String customerId)? customerSelected,
+    TResult Function(String orderNumber)? orderNumberUpdated,
     TResult Function(Product product)? productUpdated,
     TResult Function(DateTime date)? deliveryDateChanged,
     TResult Function()? createOrderCalled,
@@ -474,7 +476,7 @@ class _$DeliveryDateChanged implements DeliveryDateChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String customerId)? customerSelected,
+    TResult Function(String orderNumber)? orderNumberUpdated,
     TResult Function(Product product)? productUpdated,
     TResult Function(DateTime date)? deliveryDateChanged,
     TResult Function()? createOrderCalled,
@@ -489,7 +491,7 @@ class _$DeliveryDateChanged implements DeliveryDateChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(CustomerSelected value) customerSelected,
+    required TResult Function(OrderNumberUpdated value) orderNumberUpdated,
     required TResult Function(ProductUpdated value) productUpdated,
     required TResult Function(DeliveryDateChanged value) deliveryDateChanged,
     required TResult Function(CreateOrderCalled value) createOrderCalled,
@@ -500,7 +502,7 @@ class _$DeliveryDateChanged implements DeliveryDateChanged {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(CustomerSelected value)? customerSelected,
+    TResult Function(OrderNumberUpdated value)? orderNumberUpdated,
     TResult Function(ProductUpdated value)? productUpdated,
     TResult Function(DeliveryDateChanged value)? deliveryDateChanged,
     TResult Function(CreateOrderCalled value)? createOrderCalled,
@@ -511,7 +513,7 @@ class _$DeliveryDateChanged implements DeliveryDateChanged {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(CustomerSelected value)? customerSelected,
+    TResult Function(OrderNumberUpdated value)? orderNumberUpdated,
     TResult Function(ProductUpdated value)? productUpdated,
     TResult Function(DeliveryDateChanged value)? deliveryDateChanged,
     TResult Function(CreateOrderCalled value)? createOrderCalled,
@@ -575,7 +577,7 @@ class _$CreateOrderCalled implements CreateOrderCalled {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String customerId) customerSelected,
+    required TResult Function(String orderNumber) orderNumberUpdated,
     required TResult Function(Product product) productUpdated,
     required TResult Function(DateTime date) deliveryDateChanged,
     required TResult Function() createOrderCalled,
@@ -586,7 +588,7 @@ class _$CreateOrderCalled implements CreateOrderCalled {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String customerId)? customerSelected,
+    TResult Function(String orderNumber)? orderNumberUpdated,
     TResult Function(Product product)? productUpdated,
     TResult Function(DateTime date)? deliveryDateChanged,
     TResult Function()? createOrderCalled,
@@ -597,7 +599,7 @@ class _$CreateOrderCalled implements CreateOrderCalled {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String customerId)? customerSelected,
+    TResult Function(String orderNumber)? orderNumberUpdated,
     TResult Function(Product product)? productUpdated,
     TResult Function(DateTime date)? deliveryDateChanged,
     TResult Function()? createOrderCalled,
@@ -612,7 +614,7 @@ class _$CreateOrderCalled implements CreateOrderCalled {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(CustomerSelected value) customerSelected,
+    required TResult Function(OrderNumberUpdated value) orderNumberUpdated,
     required TResult Function(ProductUpdated value) productUpdated,
     required TResult Function(DeliveryDateChanged value) deliveryDateChanged,
     required TResult Function(CreateOrderCalled value) createOrderCalled,
@@ -623,7 +625,7 @@ class _$CreateOrderCalled implements CreateOrderCalled {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(CustomerSelected value)? customerSelected,
+    TResult Function(OrderNumberUpdated value)? orderNumberUpdated,
     TResult Function(ProductUpdated value)? productUpdated,
     TResult Function(DeliveryDateChanged value)? deliveryDateChanged,
     TResult Function(CreateOrderCalled value)? createOrderCalled,
@@ -634,7 +636,7 @@ class _$CreateOrderCalled implements CreateOrderCalled {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(CustomerSelected value)? customerSelected,
+    TResult Function(OrderNumberUpdated value)? orderNumberUpdated,
     TResult Function(ProductUpdated value)? productUpdated,
     TResult Function(DeliveryDateChanged value)? deliveryDateChanged,
     TResult Function(CreateOrderCalled value)? createOrderCalled,

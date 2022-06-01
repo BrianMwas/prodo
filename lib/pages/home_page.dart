@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:prodo/bloc/orders/list_orders_bloc.dart';
 import 'package:prodo/bloc/update_order/updateorder_bloc.dart';
 import 'package:prodo/pages/utils/order_status_enum.dart';
+import 'package:prodo/protos/generated/orders.pbgrpc.dart';
 
 import '../bloc/order/order_bloc.dart';
 import '../injectable.dart';
@@ -23,6 +25,7 @@ class _HomePageState extends State<HomePage> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
+          lazy: false,
           create: (context) =>
               getIt<ListOrdersBloc>()..add(const LoadInitialOrders()),
         ),
@@ -34,6 +37,21 @@ class _HomePageState extends State<HomePage> {
         ),
       ],
       child: Scaffold(
+        appBar: AppBar(
+          actions: [
+            TextButton(
+              onPressed: () {
+                context.go("/create-customer");
+              },
+              child: const Text(
+                "Create Customer",
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ],
+        ),
         extendBody: true,
         body: SafeArea(
           child: Container(
@@ -43,10 +61,10 @@ class _HomePageState extends State<HomePage> {
               children: [
                 const SizedBox(height: 5),
                 Text(
-                  "Orders",
+                  "All Orders",
                   style: Theme.of(context)
                       .textTheme
-                      .headline3!
+                      .headline5!
                       .copyWith(color: Colors.black),
                 ),
                 const SizedBox(
@@ -54,79 +72,105 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Expanded(
                   child: BlocBuilder<ListOrdersBloc, ListOrdersState>(
-                    buildWhen: (p, c) => p.items != c.items,
                     builder: (context, state) {
-                      return ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: state.items!.length,
-                          physics: const BouncingScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            final order = state.items![index];
+                      if (state.isLoading) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else if (state.failure != null) {
+                        return const Center(
+                          child: Text("Failed to load orders"),
+                        );
+                      } else {
+                        context
+                            .read<ListOrdersBloc>()
+                            .add(const LoadOrdersRequested());
+                        return ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: state.items!.length,
+                            physics: const BouncingScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              final order = state.items![index];
 
-                            return ExpansionTile(
-                              leading: Container(
-                                height: 100,
-                                width: 10,
-                                decoration: BoxDecoration(
-                                  color: order.status == "transit"
-                                      ? Colors.green
-                                      : order.status == "processing"
-                                          ? Colors.grey
-                                          : order.status == "delivered"
-                                              ? Colors.blue
-                                              : Colors.red,
-                                  borderRadius: BorderRadius.circular(10),
+                              return ExpansionTile(
+                                leading: Container(
+                                  height: 100,
+                                  width: 10,
+                                  decoration: BoxDecoration(
+                                    color: order.status == "transit"
+                                        ? Colors.green
+                                        : order.status == "processing"
+                                            ? Colors.grey
+                                            : order.status == "delivered"
+                                                ? Colors.blue
+                                                : Colors.red,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
                                 ),
-                              ),
-                              title: Text(state.items![index].orderNo,
-                                  style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 15,
-                                  )),
-                              subtitle: Text(
-                                  "${state.items![index].products?.length} Product(s)",
-                                  style: const TextStyle(
-                                    fontSize: 13,
-                                    color: Colors.black54,
-                                  )),
-                              trailing: IconButton(
-                                onPressed: () {
-                                  final result =
-                                      showModalBottomSheet<OrderStatus?>(
-                                    isDismissible: true,
-                                    shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(10),
-                                        topRight: Radius.circular(10),
+                                title: Text(state.items![index].orderNo,
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 15,
+                                    )),
+                                subtitle: Text(
+                                    "${state.items![index].products?.length} Product(s) -- ${order.status.toUpperCase()}",
+                                    style: const TextStyle(
+                                      fontSize: 13,
+                                      color: Colors.black54,
+                                    )),
+                                trailing: IconButton(
+                                  onPressed: () async {
+                                    final result = await showModalBottomSheet<
+                                        OrderStatus?>(
+                                      isDismissible: true,
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(10),
+                                          topRight: Radius.circular(10),
+                                        ),
                                       ),
-                                    ),
-                                    context: context,
-                                    builder: (context) => OrderStatusWidget(
-                                      currentStatus: order.status,
-                                    ),
-                                  );
-                                },
-                                icon: const Icon(
-                                  Icons.edit,
+                                      context: context,
+                                      builder: (context) => OrderStatusWidget(
+                                        currentStatus:
+                                            updateStatus(order.status),
+                                      ),
+                                    );
+
+                                    if (result != null) {
+                                      context.read<UpdateorderBloc>()
+                                        ..add(StatusChanged(
+                                            result.toString().split(".").last))
+                                        ..add(UpdateOrderId(order.id!))
+                                        ..add(const StatusBtnPressed());
+                                    }
+                                  },
+                                  icon: const Icon(
+                                    Icons.edit,
+                                  ),
                                 ),
-                              ),
-                              children: [
-                                ...List.generate(order.products!.length,
-                                    (index) {
-                                  return ListTile(
-                                    title: Text(order.products![index].name),
-                                    subtitle: Text(
-                                      order.products![index].description ??
-                                          "No description",
-                                      style: const TextStyle(
-                                        color: Colors.black45,
+                                children: [
+                                  ListTile(
+                                    dense: true,
+                                    title: const Text("Delivery date"),
+                                    subtitle: Text(DateFormat.yMMMd("en_US")
+                                        .format(order.deliveryDate.toLocal())),
+                                  ),
+                                  ...List.generate(order.products!.length,
+                                      (index) {
+                                    return ListTile(
+                                      title: Text(order.products![index].name),
+                                      dense: true,
+                                      subtitle: Text(
+                                        order.products![index].description ??
+                                            "No description",
+                                        style: const TextStyle(
+                                          color: Colors.black45,
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                })
-                              ],
-                            );
-                          });
+                                    );
+                                  })
+                                ],
+                              );
+                            });
+                      }
                     },
                   ),
                 )
@@ -136,7 +180,7 @@ class _HomePageState extends State<HomePage> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            context.go("/create-customer");
+            context.go("/create-order");
           },
           backgroundColor: Colors.black,
           child: const Icon(
@@ -148,22 +192,22 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
+OrderStatus updateStatus(String status) {
+  return OrderStatus.values
+      .firstWhere((element) => element.toString().split(".").last == status);
+}
+
 class OrderStatusWidget extends HookWidget {
   const OrderStatusWidget({
     Key? key,
     required this.currentStatus,
   }) : super(key: key);
 
-  final String currentStatus;
-
-  OrderStatus updateStatus(String status) {
-    return OrderStatus.values
-        .firstWhere((element) => element.toString().split(".").last == status);
-  }
+  final OrderStatus currentStatus;
 
   @override
   Widget build(BuildContext context) {
-    final status = useState(updateStatus(currentStatus));
+    final status = useState<OrderStatus>(currentStatus);
     return Container(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -171,41 +215,43 @@ class OrderStatusWidget extends HookWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             RadioListTile<OrderStatus>(
-                value: status.value,
-                groupValue: OrderStatus.processing,
+                groupValue: status.value,
+                value: OrderStatus.processing,
                 activeColor: Colors.grey,
                 title: const Text("Processing"),
                 subtitle: const Text("Order is being processed"),
                 onChanged: (v) {
+                  print("We changed $v");
                   status.value = v!;
                 }),
             RadioListTile<OrderStatus>(
-                value: status.value,
-                groupValue: OrderStatus.transit,
+                groupValue: status.value,
+                value: OrderStatus.transit,
                 title: const Text("In Transit"),
                 subtitle: const Text("Order is on its way"),
                 activeColor: Colors.green,
                 onChanged: (v) {
+                  print("We changed $v");
                   status.value = v!;
                 }),
             RadioListTile<OrderStatus>(
-                value: status.value,
-                dense: true,
+                groupValue: status.value,
                 title: const Text("Delivered"),
                 subtitle: const Text("Order was successfully delivered"),
                 activeColor: Colors.blue,
-                groupValue: OrderStatus.delivered,
+                value: OrderStatus.delivered,
                 onChanged: (v) {
+                  print("We changed $v");
                   status.value = v!;
                 }),
             RadioListTile<OrderStatus>(
-                value: status.value,
-                dense: true,
+                groupValue: status.value,
                 title: const Text("Cancelled"),
                 subtitle: const Text("Order was cancelled"),
-                groupValue: OrderStatus.cancelled,
+                value: OrderStatus.cancelled,
                 activeColor: Colors.red,
                 onChanged: (v) {
+                  print("We changed $v");
                   status.value = v!;
                 }),
             ElevatedButton(

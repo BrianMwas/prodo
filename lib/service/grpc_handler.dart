@@ -2,7 +2,7 @@ import 'package:grpc/grpc.dart';
 import 'package:prodo/protos/generated/orders.pbgrpc.dart';
 
 class GrpcOrdersService {
-  late OrdersClient client;
+  OrdersClient? client;
   static final GrpcOrdersService _grpcOrdersService =
       GrpcOrdersService._internal();
 
@@ -14,8 +14,8 @@ class GrpcOrdersService {
 
   static Future<GrpcOrdersService> init() async {
     final channel = ClientChannel(
-      "0.0.0.0",
-      port: 9100,
+      "10.0.2.2",
+      port: 8800,
       options: const ChannelOptions(
         credentials: ChannelCredentials.insecure(),
       ),
@@ -26,9 +26,10 @@ class GrpcOrdersService {
       _grpcOrdersService.client = OrdersClient(
         channel,
         options: CallOptions(
-          timeout: const Duration(seconds: 5),
+          timeout: const Duration(hours: 5),
         ),
       );
+      print(_grpcOrdersService.client != null);
     } catch (e) {
       print("We are not connected :(");
     }
