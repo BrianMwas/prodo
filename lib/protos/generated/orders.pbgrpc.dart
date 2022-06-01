@@ -19,6 +19,11 @@ class OrdersClient extends $grpc.Client {
           '/Orders/GetOrders',
           ($0.GetOrdersReq value) => value.writeToBuffer(),
           ($core.List<$core.int> value) => $0.GetOrdersRes.fromBuffer(value));
+  static final _$getOrdersStream =
+      $grpc.ClientMethod<$0.EmptyReq, $0.GetOrderRes>(
+          '/Orders/GetOrdersStream',
+          ($0.EmptyReq value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) => $0.GetOrderRes.fromBuffer(value));
   static final _$createOrder =
       $grpc.ClientMethod<$0.CreateOrderReq, $0.CreateOrderRes>(
           '/Orders/CreateOrder',
@@ -36,11 +41,6 @@ class OrdersClient extends $grpc.Client {
           ($0.UpdateOrderStatusReq value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.UpdateOrderStatusRes.fromBuffer(value));
-  static final _$updateOrder =
-      $grpc.ClientMethod<$0.UpdateOrderReq, $0.UpdateOrderRes>(
-          '/Orders/UpdateOrder',
-          ($0.UpdateOrderReq value) => value.writeToBuffer(),
-          ($core.List<$core.int> value) => $0.UpdateOrderRes.fromBuffer(value));
 
   OrdersClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -50,6 +50,13 @@ class OrdersClient extends $grpc.Client {
   $grpc.ResponseFuture<$0.GetOrdersRes> getOrders($0.GetOrdersReq request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getOrders, request, options: options);
+  }
+
+  $grpc.ResponseStream<$0.GetOrderRes> getOrdersStream($0.EmptyReq request,
+      {$grpc.CallOptions? options}) {
+    return $createStreamingCall(
+        _$getOrdersStream, $async.Stream.fromIterable([request]),
+        options: options);
   }
 
   $grpc.ResponseFuture<$0.CreateOrderRes> createOrder($0.CreateOrderReq request,
@@ -68,11 +75,6 @@ class OrdersClient extends $grpc.Client {
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$updateOrderStatus, request, options: options);
   }
-
-  $grpc.ResponseFuture<$0.UpdateOrderRes> updateOrder($0.UpdateOrderReq request,
-      {$grpc.CallOptions? options}) {
-    return $createUnaryCall(_$updateOrder, request, options: options);
-  }
 }
 
 abstract class OrdersServiceBase extends $grpc.Service {
@@ -86,6 +88,13 @@ abstract class OrdersServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.GetOrdersReq.fromBuffer(value),
         ($0.GetOrdersRes value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.EmptyReq, $0.GetOrderRes>(
+        'GetOrdersStream',
+        getOrdersStream_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) => $0.EmptyReq.fromBuffer(value),
+        ($0.GetOrderRes value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.CreateOrderReq, $0.CreateOrderRes>(
         'CreateOrder',
         createOrder_Pre,
@@ -109,18 +118,16 @@ abstract class OrdersServiceBase extends $grpc.Service {
             ($core.List<$core.int> value) =>
                 $0.UpdateOrderStatusReq.fromBuffer(value),
             ($0.UpdateOrderStatusRes value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.UpdateOrderReq, $0.UpdateOrderRes>(
-        'UpdateOrder',
-        updateOrder_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $0.UpdateOrderReq.fromBuffer(value),
-        ($0.UpdateOrderRes value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.GetOrdersRes> getOrders_Pre(
       $grpc.ServiceCall call, $async.Future<$0.GetOrdersReq> request) async {
     return getOrders(call, await request);
+  }
+
+  $async.Stream<$0.GetOrderRes> getOrdersStream_Pre(
+      $grpc.ServiceCall call, $async.Future<$0.EmptyReq> request) async* {
+    yield* getOrdersStream(call, await request);
   }
 
   $async.Future<$0.CreateOrderRes> createOrder_Pre(
@@ -139,19 +146,14 @@ abstract class OrdersServiceBase extends $grpc.Service {
     return updateOrderStatus(call, await request);
   }
 
-  $async.Future<$0.UpdateOrderRes> updateOrder_Pre(
-      $grpc.ServiceCall call, $async.Future<$0.UpdateOrderReq> request) async {
-    return updateOrder(call, await request);
-  }
-
   $async.Future<$0.GetOrdersRes> getOrders(
       $grpc.ServiceCall call, $0.GetOrdersReq request);
+  $async.Stream<$0.GetOrderRes> getOrdersStream(
+      $grpc.ServiceCall call, $0.EmptyReq request);
   $async.Future<$0.CreateOrderRes> createOrder(
       $grpc.ServiceCall call, $0.CreateOrderReq request);
   $async.Future<$0.CreateCustomerRes> createCustomer(
       $grpc.ServiceCall call, $0.CreateCustomerReq request);
   $async.Future<$0.UpdateOrderStatusRes> updateOrderStatus(
       $grpc.ServiceCall call, $0.UpdateOrderStatusReq request);
-  $async.Future<$0.UpdateOrderRes> updateOrder(
-      $grpc.ServiceCall call, $0.UpdateOrderReq request);
 }

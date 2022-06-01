@@ -6,9 +6,9 @@ import '../utils/failures.dart';
 
 abstract class IOrdersFacade {
   Future<Either<ClassFailures, Unit>> createOrder(OrderItem order);
-  Stream<Either<ClassFailures, List<OrderItem>>> getAllOrders();
-  Future<Either<ClassFailures, OrderItem>> updateOrder(OrderItem order);
-  Future<Either<ClassFailures, OrderItem>> updateOrderStatus(
+  Stream<Either<ClassFailures, OrderItem>> getAllOrders();
+  Future<Either<ClassFailures, List<OrderItem>>> getOrders(String? customerId);
+  Future<Either<ClassFailures, Unit>> updateOrderStatus(
       String orderId, String status);
   Future<Either<ClassFailures, Unit>> createCustomer(Customer customer);
 }

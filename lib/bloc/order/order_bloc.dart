@@ -28,14 +28,14 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
 
     on<ProductUpdated>((event, emit) {
       final productExists =
-          state.order.products.any((p) => p.id == event.product.id);
-      if (productExists) {
-        state.order.products.removeWhere((element) => false);
+          state.order.products?.any((p) => p.id == event.product.id);
+      if (productExists != null && productExists) {
+        state.order.products!.removeWhere((element) => false);
       } else {
         emit(
           state.copyWith(
             order: state.order.copyWith(
-              products: [...state.order.products, event.product],
+              products: [...state.order.products ?? [], event.product],
             ),
           ),
         );

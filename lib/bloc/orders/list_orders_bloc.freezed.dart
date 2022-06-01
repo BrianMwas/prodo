@@ -19,42 +19,38 @@ mixin _$ListOrdersEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadOrdersRequested,
-    required TResult Function(
-            Either<ClassFailures, List<OrderItem>> failureOrOrders)
-        loadOrdersReceived,
+    required TResult Function() loadInitialOrders,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loadOrdersRequested,
-    TResult Function(Either<ClassFailures, List<OrderItem>> failureOrOrders)?
-        loadOrdersReceived,
+    TResult Function()? loadInitialOrders,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadOrdersRequested,
-    TResult Function(Either<ClassFailures, List<OrderItem>> failureOrOrders)?
-        loadOrdersReceived,
+    TResult Function()? loadInitialOrders,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LoadOrdersRequested value) loadOrdersRequested,
-    required TResult Function(LoadOrdersReceived value) loadOrdersReceived,
+    required TResult Function(LoadInitialOrders value) loadInitialOrders,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(LoadOrdersRequested value)? loadOrdersRequested,
-    TResult Function(LoadOrdersReceived value)? loadOrdersReceived,
+    TResult Function(LoadInitialOrders value)? loadInitialOrders,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadOrdersRequested value)? loadOrdersRequested,
-    TResult Function(LoadOrdersReceived value)? loadOrdersReceived,
+    TResult Function(LoadInitialOrders value)? loadInitialOrders,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -119,9 +115,7 @@ class _$LoadOrdersRequested implements LoadOrdersRequested {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadOrdersRequested,
-    required TResult Function(
-            Either<ClassFailures, List<OrderItem>> failureOrOrders)
-        loadOrdersReceived,
+    required TResult Function() loadInitialOrders,
   }) {
     return loadOrdersRequested();
   }
@@ -130,8 +124,7 @@ class _$LoadOrdersRequested implements LoadOrdersRequested {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loadOrdersRequested,
-    TResult Function(Either<ClassFailures, List<OrderItem>> failureOrOrders)?
-        loadOrdersReceived,
+    TResult Function()? loadInitialOrders,
   }) {
     return loadOrdersRequested?.call();
   }
@@ -140,8 +133,7 @@ class _$LoadOrdersRequested implements LoadOrdersRequested {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadOrdersRequested,
-    TResult Function(Either<ClassFailures, List<OrderItem>> failureOrOrders)?
-        loadOrdersReceived,
+    TResult Function()? loadInitialOrders,
     required TResult orElse(),
   }) {
     if (loadOrdersRequested != null) {
@@ -154,7 +146,7 @@ class _$LoadOrdersRequested implements LoadOrdersRequested {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LoadOrdersRequested value) loadOrdersRequested,
-    required TResult Function(LoadOrdersReceived value) loadOrdersReceived,
+    required TResult Function(LoadInitialOrders value) loadInitialOrders,
   }) {
     return loadOrdersRequested(this);
   }
@@ -163,7 +155,7 @@ class _$LoadOrdersRequested implements LoadOrdersRequested {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(LoadOrdersRequested value)? loadOrdersRequested,
-    TResult Function(LoadOrdersReceived value)? loadOrdersReceived,
+    TResult Function(LoadInitialOrders value)? loadInitialOrders,
   }) {
     return loadOrdersRequested?.call(this);
   }
@@ -172,7 +164,7 @@ class _$LoadOrdersRequested implements LoadOrdersRequested {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadOrdersRequested value)? loadOrdersRequested,
-    TResult Function(LoadOrdersReceived value)? loadOrdersReceived,
+    TResult Function(LoadInitialOrders value)? loadInitialOrders,
     required TResult orElse(),
   }) {
     if (loadOrdersRequested != null) {
@@ -187,100 +179,70 @@ abstract class LoadOrdersRequested implements ListOrdersEvent {
 }
 
 /// @nodoc
-abstract class _$$LoadOrdersReceivedCopyWith<$Res> {
-  factory _$$LoadOrdersReceivedCopyWith(_$LoadOrdersReceived value,
-          $Res Function(_$LoadOrdersReceived) then) =
-      __$$LoadOrdersReceivedCopyWithImpl<$Res>;
-  $Res call({Either<ClassFailures, List<OrderItem>> failureOrOrders});
+abstract class _$$LoadInitialOrdersCopyWith<$Res> {
+  factory _$$LoadInitialOrdersCopyWith(
+          _$LoadInitialOrders value, $Res Function(_$LoadInitialOrders) then) =
+      __$$LoadInitialOrdersCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$LoadOrdersReceivedCopyWithImpl<$Res>
+class __$$LoadInitialOrdersCopyWithImpl<$Res>
     extends _$ListOrdersEventCopyWithImpl<$Res>
-    implements _$$LoadOrdersReceivedCopyWith<$Res> {
-  __$$LoadOrdersReceivedCopyWithImpl(
-      _$LoadOrdersReceived _value, $Res Function(_$LoadOrdersReceived) _then)
-      : super(_value, (v) => _then(v as _$LoadOrdersReceived));
+    implements _$$LoadInitialOrdersCopyWith<$Res> {
+  __$$LoadInitialOrdersCopyWithImpl(
+      _$LoadInitialOrders _value, $Res Function(_$LoadInitialOrders) _then)
+      : super(_value, (v) => _then(v as _$LoadInitialOrders));
 
   @override
-  _$LoadOrdersReceived get _value => super._value as _$LoadOrdersReceived;
-
-  @override
-  $Res call({
-    Object? failureOrOrders = freezed,
-  }) {
-    return _then(_$LoadOrdersReceived(
-      failureOrOrders == freezed
-          ? _value.failureOrOrders
-          : failureOrOrders // ignore: cast_nullable_to_non_nullable
-              as Either<ClassFailures, List<OrderItem>>,
-    ));
-  }
+  _$LoadInitialOrders get _value => super._value as _$LoadInitialOrders;
 }
 
 /// @nodoc
 
-class _$LoadOrdersReceived implements LoadOrdersReceived {
-  const _$LoadOrdersReceived(this.failureOrOrders);
-
-  @override
-  final Either<ClassFailures, List<OrderItem>> failureOrOrders;
+class _$LoadInitialOrders implements LoadInitialOrders {
+  const _$LoadInitialOrders();
 
   @override
   String toString() {
-    return 'ListOrdersEvent.loadOrdersReceived(failureOrOrders: $failureOrOrders)';
+    return 'ListOrdersEvent.loadInitialOrders()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LoadOrdersReceived &&
-            const DeepCollectionEquality()
-                .equals(other.failureOrOrders, failureOrOrders));
+        (other.runtimeType == runtimeType && other is _$LoadInitialOrders);
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(failureOrOrders));
-
-  @JsonKey(ignore: true)
-  @override
-  _$$LoadOrdersReceivedCopyWith<_$LoadOrdersReceived> get copyWith =>
-      __$$LoadOrdersReceivedCopyWithImpl<_$LoadOrdersReceived>(
-          this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadOrdersRequested,
-    required TResult Function(
-            Either<ClassFailures, List<OrderItem>> failureOrOrders)
-        loadOrdersReceived,
+    required TResult Function() loadInitialOrders,
   }) {
-    return loadOrdersReceived(failureOrOrders);
+    return loadInitialOrders();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loadOrdersRequested,
-    TResult Function(Either<ClassFailures, List<OrderItem>> failureOrOrders)?
-        loadOrdersReceived,
+    TResult Function()? loadInitialOrders,
   }) {
-    return loadOrdersReceived?.call(failureOrOrders);
+    return loadInitialOrders?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadOrdersRequested,
-    TResult Function(Either<ClassFailures, List<OrderItem>> failureOrOrders)?
-        loadOrdersReceived,
+    TResult Function()? loadInitialOrders,
     required TResult orElse(),
   }) {
-    if (loadOrdersReceived != null) {
-      return loadOrdersReceived(failureOrOrders);
+    if (loadInitialOrders != null) {
+      return loadInitialOrders();
     }
     return orElse();
   }
@@ -289,94 +251,47 @@ class _$LoadOrdersReceived implements LoadOrdersReceived {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LoadOrdersRequested value) loadOrdersRequested,
-    required TResult Function(LoadOrdersReceived value) loadOrdersReceived,
+    required TResult Function(LoadInitialOrders value) loadInitialOrders,
   }) {
-    return loadOrdersReceived(this);
+    return loadInitialOrders(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(LoadOrdersRequested value)? loadOrdersRequested,
-    TResult Function(LoadOrdersReceived value)? loadOrdersReceived,
+    TResult Function(LoadInitialOrders value)? loadInitialOrders,
   }) {
-    return loadOrdersReceived?.call(this);
+    return loadInitialOrders?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadOrdersRequested value)? loadOrdersRequested,
-    TResult Function(LoadOrdersReceived value)? loadOrdersReceived,
+    TResult Function(LoadInitialOrders value)? loadInitialOrders,
     required TResult orElse(),
   }) {
-    if (loadOrdersReceived != null) {
-      return loadOrdersReceived(this);
+    if (loadInitialOrders != null) {
+      return loadInitialOrders(this);
     }
     return orElse();
   }
 }
 
-abstract class LoadOrdersReceived implements ListOrdersEvent {
-  const factory LoadOrdersReceived(
-          final Either<ClassFailures, List<OrderItem>> failureOrOrders) =
-      _$LoadOrdersReceived;
-
-  Either<ClassFailures, List<OrderItem>> get failureOrOrders =>
-      throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  _$$LoadOrdersReceivedCopyWith<_$LoadOrdersReceived> get copyWith =>
-      throw _privateConstructorUsedError;
+abstract class LoadInitialOrders implements ListOrdersEvent {
+  const factory LoadInitialOrders() = _$LoadInitialOrders;
 }
 
 /// @nodoc
 mixin _$ListOrdersState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loadInProgress,
-    required TResult Function(Either<ClassFailures, List<OrderItem>> order)
-        loadedOrders,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loadInProgress,
-    TResult Function(Either<ClassFailures, List<OrderItem>> order)?
-        loadedOrders,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loadInProgress,
-    TResult Function(Either<ClassFailures, List<OrderItem>> order)?
-        loadedOrders,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(LoadInProgress value) loadInProgress,
-    required TResult Function(LoadedOrders value) loadedOrders,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(LoadInProgress value)? loadInProgress,
-    TResult Function(LoadedOrders value)? loadedOrders,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(LoadInProgress value)? loadInProgress,
-    TResult Function(LoadedOrders value)? loadedOrders,
-    required TResult orElse(),
-  }) =>
+  bool get isLoading => throw _privateConstructorUsedError;
+  bool get showFailure => throw _privateConstructorUsedError;
+  ClassFailures? get failure => throw _privateConstructorUsedError;
+  List<OrderItem>? get items => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $ListOrdersStateCopyWith<ListOrdersState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -385,6 +300,13 @@ abstract class $ListOrdersStateCopyWith<$Res> {
   factory $ListOrdersStateCopyWith(
           ListOrdersState value, $Res Function(ListOrdersState) then) =
       _$ListOrdersStateCopyWithImpl<$Res>;
+  $Res call(
+      {bool isLoading,
+      bool showFailure,
+      ClassFailures? failure,
+      List<OrderItem>? items});
+
+  $ClassFailuresCopyWith<$Res>? get failure;
 }
 
 /// @nodoc
@@ -395,374 +317,175 @@ class _$ListOrdersStateCopyWithImpl<$Res>
   final ListOrdersState _value;
   // ignore: unused_field
   final $Res Function(ListOrdersState) _then;
-}
-
-/// @nodoc
-abstract class _$$InitialCopyWith<$Res> {
-  factory _$$InitialCopyWith(_$Initial value, $Res Function(_$Initial) then) =
-      __$$InitialCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$InitialCopyWithImpl<$Res> extends _$ListOrdersStateCopyWithImpl<$Res>
-    implements _$$InitialCopyWith<$Res> {
-  __$$InitialCopyWithImpl(_$Initial _value, $Res Function(_$Initial) _then)
-      : super(_value, (v) => _then(v as _$Initial));
-
-  @override
-  _$Initial get _value => super._value as _$Initial;
-}
-
-/// @nodoc
-
-class _$Initial implements Initial {
-  const _$Initial();
-
-  @override
-  String toString() {
-    return 'ListOrdersState.initial()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Initial);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loadInProgress,
-    required TResult Function(Either<ClassFailures, List<OrderItem>> order)
-        loadedOrders,
-  }) {
-    return initial();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loadInProgress,
-    TResult Function(Either<ClassFailures, List<OrderItem>> order)?
-        loadedOrders,
-  }) {
-    return initial?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loadInProgress,
-    TResult Function(Either<ClassFailures, List<OrderItem>> order)?
-        loadedOrders,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(LoadInProgress value) loadInProgress,
-    required TResult Function(LoadedOrders value) loadedOrders,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(LoadInProgress value)? loadInProgress,
-    TResult Function(LoadedOrders value)? loadedOrders,
-  }) {
-    return initial?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(LoadInProgress value)? loadInProgress,
-    TResult Function(LoadedOrders value)? loadedOrders,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class Initial implements ListOrdersState {
-  const factory Initial() = _$Initial;
-}
-
-/// @nodoc
-abstract class _$$LoadInProgressCopyWith<$Res> {
-  factory _$$LoadInProgressCopyWith(
-          _$LoadInProgress value, $Res Function(_$LoadInProgress) then) =
-      __$$LoadInProgressCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$LoadInProgressCopyWithImpl<$Res>
-    extends _$ListOrdersStateCopyWithImpl<$Res>
-    implements _$$LoadInProgressCopyWith<$Res> {
-  __$$LoadInProgressCopyWithImpl(
-      _$LoadInProgress _value, $Res Function(_$LoadInProgress) _then)
-      : super(_value, (v) => _then(v as _$LoadInProgress));
-
-  @override
-  _$LoadInProgress get _value => super._value as _$LoadInProgress;
-}
-
-/// @nodoc
-
-class _$LoadInProgress implements LoadInProgress {
-  const _$LoadInProgress();
-
-  @override
-  String toString() {
-    return 'ListOrdersState.loadInProgress()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadInProgress);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loadInProgress,
-    required TResult Function(Either<ClassFailures, List<OrderItem>> order)
-        loadedOrders,
-  }) {
-    return loadInProgress();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loadInProgress,
-    TResult Function(Either<ClassFailures, List<OrderItem>> order)?
-        loadedOrders,
-  }) {
-    return loadInProgress?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loadInProgress,
-    TResult Function(Either<ClassFailures, List<OrderItem>> order)?
-        loadedOrders,
-    required TResult orElse(),
-  }) {
-    if (loadInProgress != null) {
-      return loadInProgress();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(LoadInProgress value) loadInProgress,
-    required TResult Function(LoadedOrders value) loadedOrders,
-  }) {
-    return loadInProgress(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(LoadInProgress value)? loadInProgress,
-    TResult Function(LoadedOrders value)? loadedOrders,
-  }) {
-    return loadInProgress?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(LoadInProgress value)? loadInProgress,
-    TResult Function(LoadedOrders value)? loadedOrders,
-    required TResult orElse(),
-  }) {
-    if (loadInProgress != null) {
-      return loadInProgress(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class LoadInProgress implements ListOrdersState {
-  const factory LoadInProgress() = _$LoadInProgress;
-}
-
-/// @nodoc
-abstract class _$$LoadedOrdersCopyWith<$Res> {
-  factory _$$LoadedOrdersCopyWith(
-          _$LoadedOrders value, $Res Function(_$LoadedOrders) then) =
-      __$$LoadedOrdersCopyWithImpl<$Res>;
-  $Res call({Either<ClassFailures, List<OrderItem>> order});
-}
-
-/// @nodoc
-class __$$LoadedOrdersCopyWithImpl<$Res>
-    extends _$ListOrdersStateCopyWithImpl<$Res>
-    implements _$$LoadedOrdersCopyWith<$Res> {
-  __$$LoadedOrdersCopyWithImpl(
-      _$LoadedOrders _value, $Res Function(_$LoadedOrders) _then)
-      : super(_value, (v) => _then(v as _$LoadedOrders));
-
-  @override
-  _$LoadedOrders get _value => super._value as _$LoadedOrders;
 
   @override
   $Res call({
-    Object? order = freezed,
+    Object? isLoading = freezed,
+    Object? showFailure = freezed,
+    Object? failure = freezed,
+    Object? items = freezed,
   }) {
-    return _then(_$LoadedOrders(
-      order == freezed
-          ? _value.order
-          : order // ignore: cast_nullable_to_non_nullable
-              as Either<ClassFailures, List<OrderItem>>,
+    return _then(_value.copyWith(
+      isLoading: isLoading == freezed
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showFailure: showFailure == freezed
+          ? _value.showFailure
+          : showFailure // ignore: cast_nullable_to_non_nullable
+              as bool,
+      failure: failure == freezed
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as ClassFailures?,
+      items: items == freezed
+          ? _value.items
+          : items // ignore: cast_nullable_to_non_nullable
+              as List<OrderItem>?,
+    ));
+  }
+
+  @override
+  $ClassFailuresCopyWith<$Res>? get failure {
+    if (_value.failure == null) {
+      return null;
+    }
+
+    return $ClassFailuresCopyWith<$Res>(_value.failure!, (value) {
+      return _then(_value.copyWith(failure: value));
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$_$ListOrderStateCopyWith<$Res>
+    implements $ListOrdersStateCopyWith<$Res> {
+  factory _$$_$ListOrderStateCopyWith(
+          _$_$ListOrderState value, $Res Function(_$_$ListOrderState) then) =
+      __$$_$ListOrderStateCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {bool isLoading,
+      bool showFailure,
+      ClassFailures? failure,
+      List<OrderItem>? items});
+
+  @override
+  $ClassFailuresCopyWith<$Res>? get failure;
+}
+
+/// @nodoc
+class __$$_$ListOrderStateCopyWithImpl<$Res>
+    extends _$ListOrdersStateCopyWithImpl<$Res>
+    implements _$$_$ListOrderStateCopyWith<$Res> {
+  __$$_$ListOrderStateCopyWithImpl(
+      _$_$ListOrderState _value, $Res Function(_$_$ListOrderState) _then)
+      : super(_value, (v) => _then(v as _$_$ListOrderState));
+
+  @override
+  _$_$ListOrderState get _value => super._value as _$_$ListOrderState;
+
+  @override
+  $Res call({
+    Object? isLoading = freezed,
+    Object? showFailure = freezed,
+    Object? failure = freezed,
+    Object? items = freezed,
+  }) {
+    return _then(_$_$ListOrderState(
+      isLoading: isLoading == freezed
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showFailure: showFailure == freezed
+          ? _value.showFailure
+          : showFailure // ignore: cast_nullable_to_non_nullable
+              as bool,
+      failure: failure == freezed
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as ClassFailures?,
+      items: items == freezed
+          ? _value._items
+          : items // ignore: cast_nullable_to_non_nullable
+              as List<OrderItem>?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$LoadedOrders implements LoadedOrders {
-  const _$LoadedOrders(this.order);
+class _$_$ListOrderState implements _$ListOrderState {
+  const _$_$ListOrderState(
+      {required this.isLoading,
+      required this.showFailure,
+      this.failure,
+      final List<OrderItem>? items})
+      : _items = items;
 
   @override
-  final Either<ClassFailures, List<OrderItem>> order;
+  final bool isLoading;
+  @override
+  final bool showFailure;
+  @override
+  final ClassFailures? failure;
+  final List<OrderItem>? _items;
+  @override
+  List<OrderItem>? get items {
+    final value = _items;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'ListOrdersState.loadedOrders(order: $order)';
+    return 'ListOrdersState(isLoading: $isLoading, showFailure: $showFailure, failure: $failure, items: $items)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LoadedOrders &&
-            const DeepCollectionEquality().equals(other.order, order));
+            other is _$_$ListOrderState &&
+            const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
+            const DeepCollectionEquality()
+                .equals(other.showFailure, showFailure) &&
+            const DeepCollectionEquality().equals(other.failure, failure) &&
+            const DeepCollectionEquality().equals(other._items, _items));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(order));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(isLoading),
+      const DeepCollectionEquality().hash(showFailure),
+      const DeepCollectionEquality().hash(failure),
+      const DeepCollectionEquality().hash(_items));
 
   @JsonKey(ignore: true)
   @override
-  _$$LoadedOrdersCopyWith<_$LoadedOrders> get copyWith =>
-      __$$LoadedOrdersCopyWithImpl<_$LoadedOrders>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loadInProgress,
-    required TResult Function(Either<ClassFailures, List<OrderItem>> order)
-        loadedOrders,
-  }) {
-    return loadedOrders(order);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loadInProgress,
-    TResult Function(Either<ClassFailures, List<OrderItem>> order)?
-        loadedOrders,
-  }) {
-    return loadedOrders?.call(order);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loadInProgress,
-    TResult Function(Either<ClassFailures, List<OrderItem>> order)?
-        loadedOrders,
-    required TResult orElse(),
-  }) {
-    if (loadedOrders != null) {
-      return loadedOrders(order);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(LoadInProgress value) loadInProgress,
-    required TResult Function(LoadedOrders value) loadedOrders,
-  }) {
-    return loadedOrders(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(LoadInProgress value)? loadInProgress,
-    TResult Function(LoadedOrders value)? loadedOrders,
-  }) {
-    return loadedOrders?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(LoadInProgress value)? loadInProgress,
-    TResult Function(LoadedOrders value)? loadedOrders,
-    required TResult orElse(),
-  }) {
-    if (loadedOrders != null) {
-      return loadedOrders(this);
-    }
-    return orElse();
-  }
+  _$$_$ListOrderStateCopyWith<_$_$ListOrderState> get copyWith =>
+      __$$_$ListOrderStateCopyWithImpl<_$_$ListOrderState>(this, _$identity);
 }
 
-abstract class LoadedOrders implements ListOrdersState {
-  const factory LoadedOrders(
-      final Either<ClassFailures, List<OrderItem>> order) = _$LoadedOrders;
+abstract class _$ListOrderState implements ListOrdersState {
+  const factory _$ListOrderState(
+      {required final bool isLoading,
+      required final bool showFailure,
+      final ClassFailures? failure,
+      final List<OrderItem>? items}) = _$_$ListOrderState;
 
-  Either<ClassFailures, List<OrderItem>> get order =>
-      throw _privateConstructorUsedError;
+  @override
+  bool get isLoading => throw _privateConstructorUsedError;
+  @override
+  bool get showFailure => throw _privateConstructorUsedError;
+  @override
+  ClassFailures? get failure => throw _privateConstructorUsedError;
+  @override
+  List<OrderItem>? get items => throw _privateConstructorUsedError;
+  @override
   @JsonKey(ignore: true)
-  _$$LoadedOrdersCopyWith<_$LoadedOrders> get copyWith =>
+  _$$_$ListOrderStateCopyWith<_$_$ListOrderState> get copyWith =>
       throw _privateConstructorUsedError;
 }

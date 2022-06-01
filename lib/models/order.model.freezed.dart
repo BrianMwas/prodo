@@ -24,7 +24,7 @@ mixin _$OrderItem {
   String get status => throw _privateConstructorUsedError;
   String get customerId => throw _privateConstructorUsedError;
   @JsonKey(name: "items")
-  List<Product> get products => throw _privateConstructorUsedError;
+  List<Product>? get products => throw _privateConstructorUsedError;
   DateTime get deliveryDate => throw _privateConstructorUsedError;
   String get orderNo => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
@@ -43,7 +43,7 @@ abstract class $OrderItemCopyWith<$Res> {
       {String? id,
       String status,
       String customerId,
-      @JsonKey(name: "items") List<Product> products,
+      @JsonKey(name: "items") List<Product>? products,
       DateTime deliveryDate,
       String orderNo,
       DateTime? createdAt});
@@ -83,7 +83,7 @@ class _$OrderItemCopyWithImpl<$Res> implements $OrderItemCopyWith<$Res> {
       products: products == freezed
           ? _value.products
           : products // ignore: cast_nullable_to_non_nullable
-              as List<Product>,
+              as List<Product>?,
       deliveryDate: deliveryDate == freezed
           ? _value.deliveryDate
           : deliveryDate // ignore: cast_nullable_to_non_nullable
@@ -110,7 +110,7 @@ abstract class _$$_OrderItemCopyWith<$Res> implements $OrderItemCopyWith<$Res> {
       {String? id,
       String status,
       String customerId,
-      @JsonKey(name: "items") List<Product> products,
+      @JsonKey(name: "items") List<Product>? products,
       DateTime deliveryDate,
       String orderNo,
       DateTime? createdAt});
@@ -152,7 +152,7 @@ class __$$_OrderItemCopyWithImpl<$Res> extends _$OrderItemCopyWithImpl<$Res>
       products: products == freezed
           ? _value._products
           : products // ignore: cast_nullable_to_non_nullable
-              as List<Product>,
+              as List<Product>?,
       deliveryDate: deliveryDate == freezed
           ? _value.deliveryDate
           : deliveryDate // ignore: cast_nullable_to_non_nullable
@@ -176,7 +176,7 @@ class _$_OrderItem implements _OrderItem {
       {this.id,
       required this.status,
       required this.customerId,
-      @JsonKey(name: "items") required final List<Product> products,
+      @JsonKey(name: "items") final List<Product>? products,
       required this.deliveryDate,
       required this.orderNo,
       this.createdAt})
@@ -191,12 +191,14 @@ class _$_OrderItem implements _OrderItem {
   final String status;
   @override
   final String customerId;
-  final List<Product> _products;
+  final List<Product>? _products;
   @override
   @JsonKey(name: "items")
-  List<Product> get products {
+  List<Product>? get products {
+    final value = _products;
+    if (value == null) return null;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_products);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
@@ -255,7 +257,7 @@ abstract class _OrderItem implements OrderItem {
       {final String? id,
       required final String status,
       required final String customerId,
-      @JsonKey(name: "items") required final List<Product> products,
+      @JsonKey(name: "items") final List<Product>? products,
       required final DateTime deliveryDate,
       required final String orderNo,
       final DateTime? createdAt}) = _$_OrderItem;
@@ -271,7 +273,7 @@ abstract class _OrderItem implements OrderItem {
   String get customerId => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: "items")
-  List<Product> get products => throw _privateConstructorUsedError;
+  List<Product>? get products => throw _privateConstructorUsedError;
   @override
   DateTime get deliveryDate => throw _privateConstructorUsedError;
   @override

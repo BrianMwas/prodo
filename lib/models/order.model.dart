@@ -12,7 +12,7 @@ class OrderItem with _$OrderItem {
       {String? id,
       required String status,
       required String customerId,
-      @JsonKey(name: "items") required List<Product> products,
+      @JsonKey(name: "items") List<Product>? products,
       required DateTime deliveryDate,
       required String orderNo,
       DateTime? createdAt}) = _OrderItem;
@@ -25,25 +25,19 @@ class OrderItem with _$OrderItem {
         deliveryDate: DateTime.now(),
       );
 
-  $pb.Order toPb() {
-    return $pb.Order(
-      id: id,
-      status: status,
-      items: null,
-      deliveryDate: Int64(deliveryDate.toUtc().millisecondsSinceEpoch),
-      orderNo: orderNo,
-      customerId: customerId,
-    );
-  }
 
   factory OrderItem.fromPb($pb.Order order) {
     return OrderItem(
+        id: order.id,
         status: order.status,
         customerId: order.customerId,
-        products: [],
+        products: order.items.map((e) => Product(
+            id: e.id,
+            name: e.name, price: e.price, sku: e.sku, description: e.description)).toList(),
         deliveryDate: DateTime.fromMicrosecondsSinceEpoch(
             order.deliveryDate.toInt(),
             isUtc: true),
+
         orderNo: order.orderNo);
   }
 

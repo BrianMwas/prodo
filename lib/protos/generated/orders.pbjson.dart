@@ -136,6 +136,16 @@ const GetOrdersRes$json = const {
 
 /// Descriptor for `GetOrdersRes`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getOrdersResDescriptor = $convert.base64Decode('CgxHZXRPcmRlcnNSZXMSHgoGb3JkZXJzGAEgAygLMgYuT3JkZXJSBm9yZGVycw==');
+@$core.Deprecated('Use getOrderResDescriptor instead')
+const GetOrderRes$json = const {
+  '1': 'GetOrderRes',
+  '2': const [
+    const {'1': 'order', '3': 1, '4': 1, '5': 11, '6': '.Order', '10': 'order'},
+  ],
+};
+
+/// Descriptor for `GetOrderRes`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getOrderResDescriptor = $convert.base64Decode('CgtHZXRPcmRlclJlcxIcCgVvcmRlchgBIAEoCzIGLk9yZGVyUgVvcmRlcg==');
 @$core.Deprecated('Use createCustomerReqDescriptor instead')
 const CreateCustomerReq$json = const {
   '1': 'CreateCustomerReq',
@@ -201,3 +211,10 @@ const UpdateOrderRes$json = const {
 
 /// Descriptor for `UpdateOrderRes`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateOrderResDescriptor = $convert.base64Decode('Cg5VcGRhdGVPcmRlclJlcxIcCgVvcmRlchgBIAEoCzIGLk9yZGVyUgVvcmRlcg==');
+@$core.Deprecated('Use emptyReqDescriptor instead')
+const EmptyReq$json = const {
+  '1': 'EmptyReq',
+};
+
+/// Descriptor for `EmptyReq`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List emptyReqDescriptor = $convert.base64Decode('CghFbXB0eVJlcQ==');

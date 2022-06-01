@@ -1,6 +1,5 @@
 syntax = "proto3";
 
-
 message Order {
   optional string id = 1;
   string status = 2;
@@ -55,6 +54,10 @@ message GetOrdersRes {
   repeated Order orders = 1;
 }
 
+message GetOrderRes {
+  Order order = 1;
+}
+
 message CreateCustomerReq {
   string name = 1;
   float lat = 2;
@@ -84,10 +87,12 @@ message UpdateOrderRes {
   Order order = 1;
 }
 
+message EmptyReq {}
+
 service Orders {
   rpc GetOrders(GetOrdersReq) returns (GetOrdersRes) {}
+  rpc GetOrdersStream(EmptyReq) returns (stream GetOrderRes) {}
   rpc CreateOrder(CreateOrderReq) returns (CreateOrderRes) {}
   rpc CreateCustomer(CreateCustomerReq) returns (CreateCustomerRes) {}
   rpc UpdateOrderStatus(UpdateOrderStatusReq) returns (UpdateOrderStatusRes) {}
-  rpc UpdateOrder(UpdateOrderReq) returns (UpdateOrderRes) {}
 }

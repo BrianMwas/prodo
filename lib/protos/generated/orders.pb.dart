@@ -670,6 +670,55 @@ class GetOrdersRes extends $pb.GeneratedMessage {
   $core.List<Order> get orders => $_getList(0);
 }
 
+class GetOrderRes extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetOrderRes', createEmptyInstance: create)
+    ..aOM<Order>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'order', subBuilder: Order.create)
+    ..hasRequiredFields = false
+  ;
+
+  GetOrderRes._() : super();
+  factory GetOrderRes({
+    Order? order,
+  }) {
+    final _result = create();
+    if (order != null) {
+      _result.order = order;
+    }
+    return _result;
+  }
+  factory GetOrderRes.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetOrderRes.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetOrderRes clone() => GetOrderRes()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetOrderRes copyWith(void Function(GetOrderRes) updates) => super.copyWith((message) => updates(message as GetOrderRes)) as GetOrderRes; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetOrderRes create() => GetOrderRes._();
+  GetOrderRes createEmptyInstance() => create();
+  static $pb.PbList<GetOrderRes> createRepeated() => $pb.PbList<GetOrderRes>();
+  @$core.pragma('dart2js:noInline')
+  static GetOrderRes getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetOrderRes>(create);
+  static GetOrderRes? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  Order get order => $_getN(0);
+  @$pb.TagNumber(1)
+  set order(Order v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasOrder() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearOrder() => clearField(1);
+  @$pb.TagNumber(1)
+  Order ensureOrder() => $_ensure(0);
+}
+
 class CreateCustomerReq extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'CreateCustomerReq', createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'name')
@@ -1024,5 +1073,34 @@ class UpdateOrderRes extends $pb.GeneratedMessage {
   void clearOrder() => clearField(1);
   @$pb.TagNumber(1)
   Order ensureOrder() => $_ensure(0);
+}
+
+class EmptyReq extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'EmptyReq', createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  EmptyReq._() : super();
+  factory EmptyReq() => create();
+  factory EmptyReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EmptyReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  EmptyReq clone() => EmptyReq()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  EmptyReq copyWith(void Function(EmptyReq) updates) => super.copyWith((message) => updates(message as EmptyReq)) as EmptyReq; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static EmptyReq create() => EmptyReq._();
+  EmptyReq createEmptyInstance() => create();
+  static $pb.PbList<EmptyReq> createRepeated() => $pb.PbList<EmptyReq>();
+  @$core.pragma('dart2js:noInline')
+  static EmptyReq getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EmptyReq>(create);
+  static EmptyReq? _defaultInstance;
 }
 

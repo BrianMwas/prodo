@@ -10,8 +10,8 @@ _$_OrderItem _$$_OrderItemFromJson(Map<String, dynamic> json) => _$_OrderItem(
       id: json['id'] as String?,
       status: json['status'] as String,
       customerId: json['customerId'] as String,
-      products: (json['items'] as List<dynamic>)
-          .map((e) => Product.fromJson(e as Map<String, dynamic>))
+      products: (json['items'] as List<dynamic>?)
+          ?.map((e) => Product.fromJson(e as Map<String, dynamic>))
           .toList(),
       deliveryDate: DateTime.parse(json['deliveryDate'] as String),
       orderNo: json['orderNo'] as String,
